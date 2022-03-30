@@ -17,9 +17,7 @@ public class ConstructorTest extends BaseTest {
     @DisplayName("Переход на вкладку 'Соусы'")
     public void goToSaucesSuccess() throws InterruptedException {
         ConstructorPage constructorPage = open(ConstructorPage.URL, ConstructorPage.class).clickSauces();
-        //Задержка перевода скрола
-        Thread.sleep(2000);
-        String attribute = constructorPage.burgerIngredientsAttribute();
+        String attribute = constructorPage.burgerIngredientsAttribute("371");
 
         assertEquals("Переключение не произошло", 370, Integer.parseInt(attribute), 10);
     }
@@ -28,9 +26,7 @@ public class ConstructorTest extends BaseTest {
     @DisplayName("Переход на вкладку 'Булки'")
     public void goToBunSuccess() throws InterruptedException {
         ConstructorPage constructorPage = open(ConstructorPage.URL, ConstructorPage.class).clickSauces().clickBun();
-        //Задержка перевода скрола
-        Thread.sleep(2000);
-        String attribute = constructorPage.burgerIngredientsAttribute();
+        String attribute = constructorPage.burgerIngredientsAttribute("40");
 
         assertEquals("Переключение не произошло", 40, Integer.parseInt(attribute), 10);
     }
@@ -39,9 +35,7 @@ public class ConstructorTest extends BaseTest {
     @DisplayName("Переход на вкладку 'Начинки'")
     public void goToFillingSuccess() throws InterruptedException {
         ConstructorPage constructorPage = open(ConstructorPage.URL, ConstructorPage.class).clickFilling();
-        //Задержка перевода скрола
-        Thread.sleep(2000);
-        String attribute = constructorPage.burgerIngredientsAttribute();
+        String attribute = constructorPage.burgerIngredientsAttribute("960");
 
         assertEquals("Переключение не произошло", 960, Integer.parseInt(attribute), 10);
     }

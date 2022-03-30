@@ -1,10 +1,14 @@
 package ru.stellarburgers.pageobject;
 
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Selenide;
+import com.codeborne.selenide.SelenideDriver;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
@@ -35,9 +39,8 @@ public class ConstructorPage {
     private SelenideElement burgerIngredients;
 
     @Step("Клик на кнопку 'Личный кабинет'")
-    public String burgerIngredientsAttribute() {
-        burgerIngredients.shouldBe(Condition.visible, Duration.ofSeconds(10));
-        return burgerIngredients.getAttribute("scrollTop");
+    public String burgerIngredientsAttribute(String expectedAttribute) {
+        return burgerIngredients.shouldBe(Condition.attribute("scrollTop", expectedAttribute), Duration.ofSeconds(3)).getAttribute("scrollTop");
     }
 
     @Step("Клик на кнопку 'Начинки'")

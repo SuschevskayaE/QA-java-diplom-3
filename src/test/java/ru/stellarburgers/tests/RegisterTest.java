@@ -15,7 +15,7 @@ import static org.junit.Assert.assertTrue;
 
 public class RegisterTest extends BaseTest {
 
-    private User user2;
+    private User user;
 
     public RegisterTest(String browser) {
         super(browser);
@@ -24,7 +24,7 @@ public class RegisterTest extends BaseTest {
     @Before
     @Step("Получение пользователя")
     public void startUp() {
-        user2 = User.getRandomUser();
+        user = User.getRandomUser();
     }
 
     @Test
@@ -32,13 +32,9 @@ public class RegisterTest extends BaseTest {
     public void registerSuccess() throws InterruptedException {
         LoginPage loginPage = open(ConstructorPage.URL, HeaderPage.class).clickAccount()
                 .clickRegister()
-                .register(user2.getName(), user2.getEmail(), user2.getPassword());
-
-        //Пользователь не всегда сразу может зайти, возникает ошибка 429
-        Thread.sleep(4000);
-
+                .register(user.getName(), user.getEmail(), user.getPassword());
         boolean isPlaceAnOrderDisplayed = loginPage
-                .loginUser(user2.getEmail(), user2.getPassword())
+                .loginUser(user.getEmail(), user.getPassword())
                 .isPlaceAnOrderButtonDisplayed();
 
         assertTrue("Пользователь не авторизовался", isPlaceAnOrderDisplayed);
@@ -49,7 +45,7 @@ public class RegisterTest extends BaseTest {
     @DisplayName("Ошибка для некорректного пароля")
     public void registerPasswordInvalidFail() throws InterruptedException {
         String error = open(ConstructorPage.URL, HeaderPage.class).clickAccount()
-                .clickRegister().fillingInRegistrationFields(user2.getName(), user2.getEmail(), "00000").clickRegister().getErrorText();
+                .clickRegister().fillingInRegistrationFields(user.getName(), user.getEmail(), "00000").clickRegister().getErrorText();
 
         assertEquals("Ошибка некорректная", "Некорректный пароль", error);
     }

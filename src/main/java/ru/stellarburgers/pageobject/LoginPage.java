@@ -34,7 +34,7 @@ public class LoginPage {
 
     @Step("Вход по имени и паролю")
     public ConstructorPage loginUser(String name, String password) {
-        enterText.shouldBe(Condition.visible);
+        enterText.shouldBe(Condition.visible, Duration.ofSeconds(6));
         emailInput.sendKeys(name);
         passwordInput.sendKeys(password);
         enterButton.click();
